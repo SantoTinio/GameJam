@@ -1,17 +1,29 @@
 using Godot;
 using System;
+using System.Data;
 
 public partial class Player : CharacterBody2D
 {
-	private Vector2 _movementVector = new Vector2();
-	public const float Speed = 300.0f;
+	[Export]
+	private PlayerStats _stats;
+	[Export]
+	private playerController _controller;
 	
-	public override void _PhysicsProcess(double delta)
+	public void SetPlayerStats(PlayerStats stats)
 	{
-		_movementVector = new Vector2(
-			Input.GetActionStrength("right") - Input.GetActionStrength("left"),
-			Input.GetActionStrength("down") - Input.GetActionStrength("up")
-		);
+		_stats = stats;
+	}
 
+	public PlayerStats GetPlayerStats()
+	{
+		return _stats;
+	}
+    public override void _Ready()
+    {
+        GD.Print("Game Ready");
+    }
+    public bool CanMove()
+	{
+		return true;
 	}
 }

@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfkvisyo52s35"]
+[gd_scene load_steps=11 format=3 uid="uid://cfkvisyo52s35"]
 
+[ext_resource type="Script" path="res://Game/Scenes/Player.cs" id="1_uhbho"]
 [ext_resource type="Texture2D" uid="uid://ckldcafyck62s" path="res://Assets/Sprites/Goom/Goom_Idle1.png" id="2_2fhj0"]
 [ext_resource type="Texture2D" uid="uid://cnrckp6jdugss" path="res://Assets/Sprites/Goom/Goom_Idle2.png" id="3_7isu6"]
 [ext_resource type="Texture2D" uid="uid://exjbwe24c52p" path="res://Assets/Sprites/Goom/Goom_Idle3.png" id="4_s7aph"]
 [ext_resource type="Texture2D" uid="uid://j55wmsn2g4se" path="res://Assets/Sprites/Goom/Goom_Idle4.png" id="5_w06xn"]
 [ext_resource type="Texture2D" uid="uid://g7tbh5hktjlk" path="res://Assets/Sprites/Goom/Goom_Idle5.png" id="6_4i4ra"]
+[ext_resource type="PackedScene" uid="uid://dfh5v7tv15823" path="res://Game/Scenes/Player/player_stats.tscn" id="7_nflbj"]
+[ext_resource type="PackedScene" uid="uid://bufmn53teodym" path="res://Game/Scenes/Player/player_controller.tscn" id="8_7p4i2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xs38x"]
 animations = [{
@@ -33,7 +36,8 @@ animations = [{
 radius = 7.0
 height = 14.0
 
-[node name="Goom" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_uhbho")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
@@ -44,6 +48,6 @@ animation = &"Idle"
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_q7jli")
 
-[node name="PlayerStats" type="Node2D" parent="."]
+[node name="PlayerStats" parent="." instance=ExtResource("7_nflbj")]
 
-[node name="Controller" type="Node2D" parent="."]
+[node name="playerController" parent="." instance=ExtResource("8_7p4i2")]
