@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://bgf64mbsanc23"]
+[gd_scene load_steps=3 format=3 uid="uid://bgf64mbsanc23"]
+
+[ext_resource type="PackedScene" uid="uid://cfkvisyo52s35" path="res://Game/Scenes/Player.tscn" id="1_datae"]
+[ext_resource type="PackedScene" uid="uid://b4mt6e8m52bgq" path="res://Game/Scenes/debug_map.tscn" id="2_5apwf"]
 
 [node name="Main" type="Node2D"]
+
+[node name="Goom" parent="." instance=ExtResource("1_datae")]
+position = Vector2(128, 116)
+
+[node name="DebugMap" parent="." instance=ExtResource("2_5apwf")]
+z_index = -1
+position = Vector2(50, 66)

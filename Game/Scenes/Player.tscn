@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfkvisyo52s35"]
+
+[ext_resource type="Texture2D" uid="uid://ckldcafyck62s" path="res://Assets/Sprites/Goom/Goom_Idle1.png" id="2_2fhj0"]
+[ext_resource type="Texture2D" uid="uid://cnrckp6jdugss" path="res://Assets/Sprites/Goom/Goom_Idle2.png" id="3_7isu6"]
+[ext_resource type="Texture2D" uid="uid://exjbwe24c52p" path="res://Assets/Sprites/Goom/Goom_Idle3.png" id="4_s7aph"]
+[ext_resource type="Texture2D" uid="uid://j55wmsn2g4se" path="res://Assets/Sprites/Goom/Goom_Idle4.png" id="5_w06xn"]
+[ext_resource type="Texture2D" uid="uid://g7tbh5hktjlk" path="res://Assets/Sprites/Goom/Goom_Idle5.png" id="6_4i4ra"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xs38x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2fhj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7isu6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_s7aph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_w06xn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_4i4ra")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7jli"]
+radius = 7.0
+height = 14.0
+
+[node name="Goom" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_xs38x")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_q7jli")
+
+[node name="PlayerStats" type="Node2D" parent="."]
+
+[node name="Controller" type="Node2D" parent="."]
