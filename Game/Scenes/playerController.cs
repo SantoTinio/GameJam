@@ -3,7 +3,7 @@ public partial class playerController : Node2D
 {
 	[Export] 
 	private Player _player;
-	private Vector2 _inputVector = new Vector2();
+	private Vector2 _inputDirection = new Vector2();
 	private Vector2 _movement = new Vector2();
 	private PlayerStats _playerStats;
 
@@ -13,26 +13,27 @@ public partial class playerController : Node2D
 		GD.Print("Controller is Ready!");
 	}
 
-	public override void _PhysicsProcess(double delta)
+	public override void _PhysicsProcess(double delta) 
 	{
-		_inputVector = new Vector2(
+		_inputDirection = new Vector2(
 			Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
 			Input.GetActionStrength("moveDown") - Input.GetActionStrength("moveUp")
 		);
-		_movement = _inputVector.LimitLength(1.0f);
+		// Auto Run
+		float speedMultiplier = Input.IsActionJustPressed("Run") ? 1.0f : _playerStats.SprintFactor;
+
+		_movement = _inputDirection.LimitLength(1.0f);
 		if (_movement != Vector2.Zero)
 		{
-			_player.Velocity = _player.Velocity.Lerp(_movement * _playerStats.speed, _playerStats.Accel);
+			_player.Velocity = _player.Velocity.Lerp(_movement * _playerStats.speed * speedMultiplier, _playerStats.Accel);
+			GD.Print("Speed = " + _playerStats.speed);
 		}
-		else
+		
 		{
 			_player.Velocity = _player.Velocity.Lerp(Vector2.Zero, _playerStats.Decel);
 		}
 
-		if (_player.CanMove())
-		{
-			_player.MoveAndSlide();
-		}
+		_player.MoveAndSlide();
 	}
 
     public override void _Input(InputEvent @event)

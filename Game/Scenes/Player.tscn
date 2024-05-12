@@ -29,25 +29,41 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7jli"]
 radius = 7.0
 height = 14.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_stats", "_controller")]
 script = ExtResource("1_uhbho")
+_stats = NodePath("PlayerStats")
+_controller = NodePath("playerController")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 20.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_xs38x")
 animation = &"Idle"
+frame = 3
+frame_progress = 0.958538
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 4)
 shape = SubResource("CapsuleShape2D_q7jli")
 
 [node name="PlayerStats" parent="." instance=ExtResource("7_nflbj")]
+SprintFactor = 3.0
+Accel = 0.5
+Decel = 0.7
 
-[node name="playerController" parent="." instance=ExtResource("8_7p4i2")]
+[node name="playerController" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("8_7p4i2")]
+_player = NodePath("..")
