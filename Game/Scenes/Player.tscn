@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://cfkvisyo52s35"]
+[gd_scene load_steps=28 format=3 uid="uid://cfkvisyo52s35"]
 
 [ext_resource type="Script" path="res://Game/Scenes/Player/Player.cs" id="1_y0ut5"]
 [ext_resource type="Texture2D" uid="uid://b4m48vvrb7epu" path="res://Assets/Sprites/Goom/Goon_Anims.png" id="2_u2k3l"]
+[ext_resource type="Script" path="res://Game/Scenes/Player/playerAnimation.cs" id="5_ewc2k"]
 [ext_resource type="PackedScene" uid="uid://dfh5v7tv15823" path="res://Game/Scenes/Player/player_stats.tscn" id="7_nflbj"]
 [ext_resource type="PackedScene" uid="uid://bufmn53teodym" path="res://Game/Scenes/Player/player_controller.tscn" id="8_7p4i2"]
 
@@ -194,11 +195,13 @@ SprintFactor = 3.0
 Accel = 0.5
 Decel = 0.7
 
-[node name="playerController" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("8_7p4i2")]
+[node name="playerController" parent="." node_paths=PackedStringArray("_player", "_anims") instance=ExtResource("8_7p4i2")]
 _player = NodePath("..")
+_anims = NodePath("../playerAnimation")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="playerAnimation" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_player")]
 sprite_frames = SubResource("SpriteFrames_sf6od")
-animation = &"Down"
-frame = 2
-frame_progress = 0.951435
+animation = &"Left"
+frame_progress = 0.912147
+script = ExtResource("5_ewc2k")
+_player = NodePath("..")

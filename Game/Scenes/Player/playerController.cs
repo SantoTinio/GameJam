@@ -4,6 +4,8 @@ public partial class playerController : Node2D
 {
 	[Export] 
 	private Player _player;
+	[Export]
+	private playerAnimation _anims;
 	private Vector2 _inputDirection = new Vector2();
 	private Vector2 _movement = new Vector2();
 	private PlayerStats _playerStats;
@@ -16,7 +18,8 @@ public partial class playerController : Node2D
 
 	public override void _PhysicsProcess(double delta) 
 	{
-		_playerDirection(GetViewport().GetMousePosition().LimitLength(1.0f), _player.GetPositionDelta());
+		_anims._updateAnimation();
+		//_playerDirection(GetViewport().GetMousePosition().LimitLength(1.0f), _player.GetPositionDelta());
 		_inputDirection = new Vector2(
 			Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
 			Input.GetActionStrength("moveDown") - Input.GetActionStrength("moveUp")
@@ -37,7 +40,7 @@ public partial class playerController : Node2D
 
 		_player.MoveAndSlide();
 	}
-	public void _updateAnimation(Vector2 state)
+	/*public void _updateAnimation(Vector2 state)
 	{
 		AnimatedSprite2D animate = (AnimatedSprite2D)GetNode("/root/Main/Goom/AnimatedSprite2D");
 		animate.Play("Down");
@@ -51,6 +54,7 @@ public partial class playerController : Node2D
 		Vector2 distance = Direction - Player;
 		GD.Print("Mouse to Player distance: " + distance);
 	}
+	*/
 	
 }
 
