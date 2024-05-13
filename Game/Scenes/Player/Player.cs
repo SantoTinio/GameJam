@@ -22,8 +22,4 @@ public partial class Player : CharacterBody2D
     {
         GD.Print("Game Ready");
     }
-    public bool CanMove()
-	{
-		return true;
-	}
 }

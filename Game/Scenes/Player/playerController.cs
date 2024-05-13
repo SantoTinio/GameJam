@@ -1,3 +1,4 @@
+using System;
 using Godot;
 public partial class playerController : Node2D
 {
@@ -15,6 +16,7 @@ public partial class playerController : Node2D
 
 	public override void _PhysicsProcess(double delta) 
 	{
+		_playerDirection(GetViewport().GetMousePosition().LimitLength(1.0f), _player.GetPositionDelta());
 		_inputDirection = new Vector2(
 			Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
 			Input.GetActionStrength("moveDown") - Input.GetActionStrength("moveUp")
@@ -26,33 +28,31 @@ public partial class playerController : Node2D
 		if (_movement != Vector2.Zero)
 		{
 			_player.Velocity = _player.Velocity.Lerp(_movement * _playerStats.speed * speedMultiplier, _playerStats.Accel);
-			GD.Print("Speed = " + _playerStats.speed);
 		}
 		
 		{
 			_player.Velocity = _player.Velocity.Lerp(Vector2.Zero, _playerStats.Decel);
+			
 		}
 
 		_player.MoveAndSlide();
 	}
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("moveUp"))
-		{
-			GD.Print("moved up");
-		}
-		 if (@event.IsActionPressed("moveDown"))
-		{
-			GD.Print("moved Down");
-		}
-		 if (@event.IsActionPressed("moveLeft"))
-		{
-			GD.Print("moved Left");
-		}
-		 if (@event.IsActionPressed("moveRight"))
-		{
-			GD.Print("moved Right");
-		}
-    }
+	public void _updateAnimation(Vector2 state)
+	{
+		AnimatedSprite2D animate = (AnimatedSprite2D)GetNode("/root/Main/Goom/AnimatedSprite2D");
+		animate.Play("Down");
+	}
+	public void _playerDirection(Vector2 Direction, Vector2 Player)
+	{
+		//var direction = GetViewport().GetMousePosition().Normalized;
+		GD.Print("Mouse Position: " + Direction);
+		GD.Print("Player Position: " + Player);
+		//Mouse distance to Player
+		Vector2 distance = Direction - Player;
+		GD.Print("Mouse to Player distance: " + distance);
+	}
+	
 }
+
+
+ 
