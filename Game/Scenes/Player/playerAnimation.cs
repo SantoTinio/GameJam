@@ -5,37 +5,30 @@ public partial class playerAnimation : AnimatedSprite2D
 {
 	[Export] 
 	private Player _player;
-	private Vector2 mousePosition = new Vector2();
 	private Vector2 playerPosition = new Vector2();
-	private Vector2 _direction = new Vector2();
+	private double _angle;
 
 	public void _updateAnimation()
 	{
-		mousePosition = GetViewport().GetMousePosition();
 		playerPosition = _player.Position;
-		_direction = playerPosition.DirectionTo(mousePosition);	
-		GD.Print("Direction: " + _direction);
-
-		// Use C or something not pythagoras but, A + B = C
-		//Up
-		if (_direction.Y < 0.3)
+		_angle = GetGlobalMousePosition().AngleToPoint(playerPosition);
+		if (_angle > -0.8 && _angle < 0.6)
 		{
-			if (_direction.X >0.94)
-			{
-				Play("Right");
-			}
-			else
-			{
-				Play("Up");
-			}
-			
+			Play("Left");
 		}
-		//Down
-		else if(_direction.Y > 0.3)
+		else if (_angle >= 0.6 && _angle < 2.6)
+		{
+			Play("Up");
+		}
+		else if (_angle >= 2.6 && _angle <= 3.14 || _angle >= -2.14 && _angle < -3.14)
+		{
+			Play("Right");
+		}
+		else 
 		{
 			Play("Down");
 		}
-
+		
 
 	}
 }
