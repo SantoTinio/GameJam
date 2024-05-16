@@ -71,13 +71,16 @@ public partial class playerController : Node2D
 	{
 		var bullet = (Bullet)Bullet.Instantiate();
 		var direction = Vector2.Right.Rotated(_player.Position.AngleToPoint(GetGlobalMousePosition()));
+		if (!bullet.isReady)
+		{
+			_player.AddChild(bullet);
 
-		_player.AddChild(bullet);
-
-		bullet.direction = direction;
-		bullet.LookAt(_player.GetGlobalMousePosition());
-		bullet.spawnLocation = _marker.Position;
-		bullet.targetLocation = GetGlobalMousePosition();
+			bullet.direction = direction;
+			bullet.LookAt(_player.GetGlobalMousePosition());
+			bullet.spawnLocation = _marker.Position;
+			bullet.targetLocation = GetGlobalMousePosition();
+		}
+		
 }
 
 }

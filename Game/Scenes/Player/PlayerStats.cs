@@ -16,5 +16,5 @@ public partial class PlayerStats : Node2D
 	[Export]
 	public float Decel = 0.5f;
 	[Export]
-	public int bulletCount = 3;
+	public float bulletRate = 1;
 }

@@ -15,7 +15,7 @@ public partial class Bullet : Area2D
 	public Vector2 targetLocation;
 	[Export]
 	public Vector2 direction;
-	private bool isReady;
+	public bool isReady;
 
     public override void _PhysicsProcess(double delta)
     {

@@ -170,9 +170,8 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q7jli"]
-radius = 5.0
-height = 10.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ra3q"]
+size = Vector2(12, 4)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_stats", "_controller")]
 motion_mode = 1
@@ -195,9 +194,8 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 3)
-shape = SubResource("CapsuleShape2D_q7jli")
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_1ra3q")
 
 [node name="PlayerStats" parent="." instance=ExtResource("7_nflbj")]
 visible = false
