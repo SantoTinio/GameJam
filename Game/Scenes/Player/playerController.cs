@@ -1,5 +1,6 @@
 using System;
 using Godot;
+using GodotPlugins.Game;
 public partial class playerController : Node2D
 {
 	[Export] 
@@ -7,13 +8,15 @@ public partial class playerController : Node2D
 	[Export]
 	private playerAnimation _anims;
 	[Export]
-	private Bullet _bullet;
+	private Marker _marker;
+	private PackedScene Bullet;
 	private Vector2 _inputDirection = new Vector2();
 	private Vector2 _movement = new Vector2();
 	private PlayerStats _playerStats;
 
 	public override void _Ready()
 	{
+		Bullet = GD.Load<PackedScene>("res://Game/Scenes/Bullet/bullet.tscn");
 		_playerStats = _player.GetPlayerStats();
 		GD.Print("Controller is Ready!");
 	}
@@ -40,6 +43,8 @@ public partial class playerController : Node2D
 			
 		}
 
+		//shoot
+		ShootIt();
 		_player.MoveAndSlide();
 	}
 
@@ -47,20 +52,33 @@ public partial class playerController : Node2D
     {
         if (@event.IsActionPressed("Shoot"))
 		{
-			_player.Marker().LookAt(_player.GetGlobalMousePosition());
-
 			for (var i = 0; i < _playerStats.bulletCount; i++)
 			{
-				var bullet = _bullet;
-				var direction = Vector2.Right.Rotated(GetGlobalMousePosition().AngleToPoint(_player.Position));
+				var bullet = (Bullet)Bullet.Instantiate();
+				var direction = Vector2.Right.Rotated(_player.Position.AngleToPoint(GetGlobalMousePosition()));
 
-				Global.Main.AddChild(bullet);
+				_player.AddChild(bullet);
 
-
+				bullet.direction = direction;
+				bullet.LookAt(_player.GetGlobalMousePosition());
+				bullet.spawnLocation = _marker.Position;
+				bullet.targetLocation = GetGlobalMousePosition();
 			}
 		}
     }*/
 
+	public void ShootIt()
+	{
+		var bullet = (Bullet)Bullet.Instantiate();
+		var direction = Vector2.Right.Rotated(_player.Position.AngleToPoint(GetGlobalMousePosition()));
+
+		_player.AddChild(bullet);
+
+		bullet.direction = direction;
+		bullet.LookAt(_player.GetGlobalMousePosition());
+		bullet.spawnLocation = _marker.Position;
+		bullet.targetLocation = GetGlobalMousePosition();
+}
 
 }
 
