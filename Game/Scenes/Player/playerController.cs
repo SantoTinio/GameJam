@@ -6,6 +6,8 @@ public partial class playerController : Node2D
 	private Player _player;
 	[Export]
 	private playerAnimation _anims;
+	[Export]
+	private Bullet _bullet;
 	private Vector2 _inputDirection = new Vector2();
 	private Vector2 _movement = new Vector2();
 	private PlayerStats _playerStats;
@@ -41,13 +43,23 @@ public partial class playerController : Node2D
 		_player.MoveAndSlide();
 	}
 
-    public override void _Input(InputEvent @event)
+    /*public override void _Input(InputEvent @event)
     {
         if (@event.IsActionPressed("Shoot"))
 		{
-			//_range.SpawnSickle();
+			_player.Marker().LookAt(_player.GetGlobalMousePosition());
+
+			for (var i = 0; i < _playerStats.bulletCount; i++)
+			{
+				var bullet = _bullet;
+				var direction = Vector2.Right.Rotated(GetGlobalMousePosition().AngleToPoint(_player.Position));
+
+				Global.Main.AddChild(bullet);
+
+
+			}
 		}
-    }
+    }*/
 
 
 }

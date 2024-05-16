@@ -1,9 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://cfkvisyo52s35"]
+[gd_scene load_steps=28 format=3 uid="uid://cfkvisyo52s35"]
 
 [ext_resource type="Script" path="res://Game/Scenes/Player/Player.cs" id="1_y0ut5"]
 [ext_resource type="Texture2D" uid="uid://b4m48vvrb7epu" path="res://Assets/Sprites/Goom/Goon_Anims.png" id="2_u2k3l"]
 [ext_resource type="Script" path="res://Game/Scenes/Player/playerAnimation.cs" id="5_ewc2k"]
-[ext_resource type="Texture2D" uid="uid://bgrbxc5kg7mt0" path="res://Assets/Sprites/icon.svg" id="6_o8qqc"]
 [ext_resource type="PackedScene" uid="uid://dfh5v7tv15823" path="res://Game/Scenes/Player/player_stats.tscn" id="7_nflbj"]
 [ext_resource type="PackedScene" uid="uid://bufmn53teodym" path="res://Game/Scenes/Player/player_controller.tscn" id="8_7p4i2"]
 
@@ -174,27 +173,6 @@ animations = [{
 radius = 5.0
 height = 10.0
 
-[sub_resource type="CSharpScript" id="CSharpScript_l3hnk"]
-script/source = "using Godot;
-using System;
-
-public partial class Bullet : RigidBody2D
-{
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-}
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dj81"]
-size = Vector2(5, 6)
-
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_stats", "_controller")]
 motion_mode = 1
 script = ExtResource("1_y0ut5")
@@ -209,6 +187,7 @@ script = ExtResource("5_ewc2k")
 _player = NodePath("..")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 20.0
@@ -221,25 +200,15 @@ position = Vector2(0, 3)
 shape = SubResource("CapsuleShape2D_q7jli")
 
 [node name="PlayerStats" parent="." instance=ExtResource("7_nflbj")]
+visible = false
 SprintFactor = 3.0
 Accel = 0.5
 Decel = 0.7
 
-[node name="playerController" parent="." node_paths=PackedStringArray("_player", "_anims", "_range") instance=ExtResource("8_7p4i2")]
+[node name="playerController" parent="." node_paths=PackedStringArray("_player", "_anims") instance=ExtResource("8_7p4i2")]
+visible = false
 _player = NodePath("..")
 _anims = NodePath("../playerAnimation")
-_range = NodePath("")
 
-[node name="Bullet" type="RigidBody2D" parent="."]
-script = SubResource("CSharpScript_l3hnk")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Bullet"]
-position = Vector2(0, 3)
-shape = SubResource("RectangleShape2D_4dj81")
-
-[node name="Sprite2D" type="Sprite2D" parent="Bullet"]
-position = Vector2(0, 3)
-scale = Vector2(0.0507813, 0.0585938)
-texture = ExtResource("6_o8qqc")
-
-[node name="Timer" type="Timer" parent="Bullet"]
+[node name="Marker" type="Marker2D" parent="."]
+position = Vector2(0, 2)
