@@ -1,6 +1,4 @@
-using System;
 using Godot;
-using GodotPlugins.Game;
 public partial class playerController : Node2D
 {
 	[Export] 
@@ -13,6 +11,8 @@ public partial class playerController : Node2D
 	private Vector2 _inputDirection = new Vector2();
 	private Vector2 _movement = new Vector2();
 	private PlayerStats _playerStats;
+	private double time = 10;
+	private double maxTime = 1.0;
 
 	public override void _Ready()
 	{
@@ -29,6 +29,7 @@ public partial class playerController : Node2D
 			Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
 			Input.GetActionStrength("moveDown") - Input.GetActionStrength("moveUp")
 		);
+
 		// Auto Run
 		float speedMultiplier = Input.IsActionJustPressed("Run") ? 1.0f : _playerStats.SprintFactor;
 
@@ -44,34 +45,15 @@ public partial class playerController : Node2D
 		}
 
 		//shoot
-		ShootIt();
+		ShootIt(delta);
 		_player.MoveAndSlide();
 	}
 
-    /*public override void _Input(InputEvent @event)
-    {
-        if (@event.IsActionPressed("Shoot"))
-		{
-			for (var i = 0; i < _playerStats.bulletCount; i++)
-			{
-				var bullet = (Bullet)Bullet.Instantiate();
-				var direction = Vector2.Right.Rotated(_player.Position.AngleToPoint(GetGlobalMousePosition()));
-
-				_player.AddChild(bullet);
-
-				bullet.direction = direction;
-				bullet.LookAt(_player.GetGlobalMousePosition());
-				bullet.spawnLocation = _marker.Position;
-				bullet.targetLocation = GetGlobalMousePosition();
-			}
-		}
-    }*/
-
-	public void ShootIt()
+    private void ShootIt(double delta)
 	{
 		var bullet = (Bullet)Bullet.Instantiate();
 		var direction = Vector2.Right.Rotated(_player.Position.AngleToPoint(GetGlobalMousePosition()));
-		if (!bullet.isReady)
+		if (getTime(delta))
 		{
 			_player.AddChild(bullet);
 
@@ -80,8 +62,19 @@ public partial class playerController : Node2D
 			bullet.spawnLocation = _marker.Position;
 			bullet.targetLocation = GetGlobalMousePosition();
 		}
-		
-}
+		else return;
+	}
+
+	private bool getTime(double delta)
+	{
+		time += delta * _playerStats.fireRate;
+		GD.Print(time);
+		if (time < maxTime) return false;
+		else {
+			time = 0;
+			return true;
+		}
+	}
 
 }
 
