@@ -147,6 +147,3 @@ public partial class playerController : Node2D
 		}
 	}
 }
-
-
- 
