@@ -35,7 +35,6 @@ public partial class playerController : Node2D
 		);
 		
 		//Slime dash
-
 		if (!isDashReady())
 		{
 			if (dashed)	returnSpeed(delta);
@@ -63,6 +62,7 @@ public partial class playerController : Node2D
 			_player.Velocity = _player.Velocity.Lerp(Vector2.Zero, _playerStats.Decel);
 			
 		}
+
 		//shoot
 		ShootIt(delta);
 		//MOVE THE PLAYER!
@@ -131,7 +131,6 @@ public partial class playerController : Node2D
 	private bool isBulletReady(double delta)
 	{
 		time += delta * _playerStats.fireRate;
-
 		if (time < maxTime) return false;
 		else {
 			time = 0;
