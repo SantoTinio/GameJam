@@ -33,6 +33,8 @@ public partial class playerController : Node2D
 			Input.GetActionStrength("moveRight") - Input.GetActionStrength("moveLeft"),
 			Input.GetActionStrength("moveDown") - Input.GetActionStrength("moveUp")
 		);
+		
+		//Slime dash
 
 		if (!isDashReady())
 		{
@@ -63,11 +65,13 @@ public partial class playerController : Node2D
 		}
 		//shoot
 		ShootIt(delta);
+		//MOVE THE PLAYER!
 		_player.MoveAndSlide();
 	}
 
     public override void _Input(InputEvent @event)
     {
+		// debug Check! Left Click to see Player Stats
         if (@event.IsActionPressed("Shoot"))
 		{
 			GD.Print("Health: " + _playerStats.health);
@@ -75,6 +79,7 @@ public partial class playerController : Node2D
 			GD.Print("FireRate: " + _playerStats.fireRate);
 			GD.Print("Dash: " + +_playerStats.dashCount);
 		}
+		//Space to Dash
 		if (@event.IsActionPressed("Dash"))
 		{
 			GD.Print("dashing");
@@ -86,6 +91,7 @@ public partial class playerController : Node2D
 			}
 		}
     }
+	//Bullet Spawning function
     private void ShootIt(double delta)
 	{
 		var bullet = (Bullet)Bullet.Instantiate();
@@ -102,11 +108,13 @@ public partial class playerController : Node2D
 		else return;
 	}
 
+	//Checks if player has dash!
 	private bool isDashReady()
 	{
 		if (_playerStats.dashCount > 0)	return true;
 		else return false;
 	}
+	//Returns player speed to original speed after the dash frame
 	private void returnSpeed(double delta)
 	{
 		dashTimer += delta;
@@ -119,6 +127,7 @@ public partial class playerController : Node2D
 		}
 	}
 
+	//Bullet Cooldown!
 	private bool isBulletReady(double delta)
 	{
 		time += delta * _playerStats.fireRate;
