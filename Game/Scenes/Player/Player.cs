@@ -1,8 +1,4 @@
 using Godot;
-using System;
-using System.ComponentModel;
-using System.Data;
-
 public partial class Player : CharacterBody2D
 {
 	[Export]

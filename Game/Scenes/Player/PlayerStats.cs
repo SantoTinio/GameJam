@@ -1,5 +1,4 @@
 using Godot;
-
 public partial class PlayerStats : Node2D
 {
 	[Export]
