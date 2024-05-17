@@ -17,6 +17,7 @@ public partial class playerController : Node2D
 	private double DashCooldown;
 	private double time = 10;
 	private double maxTime = 1.0;
+	private float _initSpeed = 35.0f;
 
 	public override void _Ready()
 	{
@@ -35,20 +36,19 @@ public partial class playerController : Node2D
 		);
 		
 		//Slime dash
-		if (!isDashReady())
+		if (!isDashReady() || dashed || _playerStats.dashCount != _playerStats.maxDashCount)
 		{
+			//return to ogSpeed
 			if (dashed)	returnSpeed(delta);
-
+			//Cooldown the dash
 			DashCooldown += delta;
-			GD.Print("CoolTime:" + DashCooldown);
-
 			if (DashCooldown > 5.0)
 			{
 				_playerStats.dashCount += 1;
 				DashCooldown = 0;
+				GD.Print("Dashes:" + _playerStats.dashCount);
 			} 
 		}	
-
 		// Auto Run
 		float speedMultiplier = Input.IsActionJustPressed("Run") ? 1.0f : _playerStats.SprintFactor;
 
@@ -77,7 +77,7 @@ public partial class playerController : Node2D
 			GD.Print("Health: " + _playerStats.health);
 			GD.Print("Speed: " + _playerStats.speed);
 			GD.Print("FireRate: " + _playerStats.fireRate);
-			GD.Print("Dash: " + +_playerStats.dashCount);
+			GD.Print("Dash: " + _playerStats.dashCount);
 		}
 		//Space to Dash
 		if (@event.IsActionPressed("Dash"))
@@ -89,6 +89,18 @@ public partial class playerController : Node2D
 				_playerStats.dashCount -= 1;
 				dashed = true;
 			}
+		}
+		if (@event.IsActionPressed("LevelUp"))
+		{
+			_playerStats.health += 1;
+			_playerStats.speed = _playerStats.speed * 1.10f;
+			_playerStats.fireRate = _playerStats.fireRate * 1.15f;
+			_playerStats.maxDashCount += 1;
+			_initSpeed = _playerStats.speed;
+			GD.Print("Health: " + _playerStats.health);
+			GD.Print("Speed: " + _playerStats.speed);
+			GD.Print("FireRate: " + _playerStats.fireRate);
+			GD.Print("Max Dash: " + _playerStats.maxDashCount);
 		}
     }
 	//Bullet Spawning function
@@ -107,26 +119,23 @@ public partial class playerController : Node2D
 		}
 		else return;
 	}
-
 	//Checks if player has dash!
 	private bool isDashReady()
 	{
-		if (_playerStats.dashCount > 0)	return true;
+		if (_playerStats.dashCount > 0 && _playerStats.dashCount <= _playerStats.maxDashCount)	return true;
 		else return false;
 	}
 	//Returns player speed to original speed after the dash frame
 	private void returnSpeed(double delta)
 	{
 		dashTimer += delta;
-		GD.Print("returning Speed");
 		if (dashTimer > 0.0167)
 		{
-			_playerStats.speed = 50.00f;
+			_playerStats.speed = _initSpeed;
 			dashTimer = 0.0;
 			dashed = false;
 		}
 	}
-
 	//Bullet Cooldown!
 	private bool isBulletReady(double delta)
 	{
@@ -137,7 +146,6 @@ public partial class playerController : Node2D
 			return true;
 		}
 	}
-
 }
 
 

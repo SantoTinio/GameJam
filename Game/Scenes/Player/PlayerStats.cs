@@ -5,7 +5,7 @@ public partial class PlayerStats : Node2D
 	[Export]
 	public float health = 5.00f;
 	[Export]
-	public float speed = 50.00f;
+	public float speed = 35.00f;
 	[Export]
 	public float maxHealth = 10.00f;
 	[Export]
@@ -17,5 +17,7 @@ public partial class PlayerStats : Node2D
 	[Export]
 	public float fireRate = 1;
 	[Export]
-	public int dashCount = 1;
+	public int dashCount = 2;
+	[Export]
+	public int maxDashCount = 2;
 }
