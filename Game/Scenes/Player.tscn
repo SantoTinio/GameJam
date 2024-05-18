@@ -200,6 +200,7 @@ shape = SubResource("RectangleShape2D_1ra3q")
 
 [node name="PlayerStats" parent="." instance=ExtResource("7_nflbj")]
 visible = false
+health = 3.0
 SprintFactor = 3.0
 Accel = 0.5
 Decel = 0.7
