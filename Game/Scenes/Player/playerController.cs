@@ -85,7 +85,7 @@ public partial class playerController : Node2D
 			GD.Print("dashing");
 			if (isDashReady())
 			{
-				_playerStats.speed = 1600;
+				_playerStats.speed = 1300;
 				_playerStats.dashCount -= 1;
 				dashed = true;
 			}
