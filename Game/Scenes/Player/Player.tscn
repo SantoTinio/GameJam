@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dv3x3akj8hxq6"]
+[gd_scene load_steps=29 format=3 uid="uid://cfkvisyo52s35"]
 
 [ext_resource type="Script" path="res://Game/Scenes/Player/Player.cs" id="1_y0ut5"]
 [ext_resource type="Texture2D" uid="uid://b4m48vvrb7epu" path="res://Assets/Sprites/Goom/Goon_Anims.png" id="2_u2k3l"]
@@ -173,12 +173,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ra3q"]
 size = Vector2(12, 4)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_stats", "_controller", "_marker")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_stats", "_controller")]
 motion_mode = 1
 script = ExtResource("1_y0ut5")
 _stats = NodePath("PlayerStats")
 _controller = NodePath("playerController")
-_marker = NodePath("Marker2D")
 
 [node name="playerAnimation" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_player")]
 sprite_frames = SubResource("SpriteFrames_sf6od")
