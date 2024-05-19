@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class SpawnTimer : Timer
@@ -8,11 +9,12 @@ public partial class SpawnTimer : Timer
 	private PathFollow2D _MobSpawner;
 	public void SpawnTime()
 	{
-		_MobSpawner.VOffset = _Main._Random.Next();
-		_MobSpawner.HOffset = _Main._Random.Next();
+		_MobSpawner.Progress = _Main._Random.Next();
 		var warrior = (Warrior)_Main._Warrior.Instantiate();
 		_Main.AddChild(warrior);
+		GD.Print( _MobSpawner.Position);
 		
-		warrior.SpawnPosition = _MobSpawner.Position;
+
+		warrior.Position = _MobSpawner.Position;
 	}
 }

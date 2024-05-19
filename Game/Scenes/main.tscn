@@ -7,7 +7,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_7h6k3"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 624, 8, 0, 0, 0, 0, 16, 16, 0, 0, 0, 0, 8, 352, 0, 0, 0, 0, 616, 344, 0, 0, 0, 0, 624, 8)
+"points": PackedVector2Array(0, 0, 0, 0, 624.103, 23.6364, -1.66023, -1.60535, 1.66023, 1.60535, 16, 23.6364, 0, 0, 0, 0, 16, 352, 0, 0, 0, 0, 632, 352, 0, 0, 0, 0, 624.103, 23.6364)
 }
 point_count = 5
 
@@ -29,11 +29,13 @@ _Main = NodePath("..")
 _MobSpawner = NodePath("../MobPath/MobSpawner")
 
 [node name="MobPath" type="Path2D" parent="."]
+position = Vector2(-8.20779, -16.7619)
+scale = Vector2(1.01299, 1.04762)
 curve = SubResource("Curve2D_7h6k3")
 
 [node name="MobSpawner" type="PathFollow2D" parent="MobPath"]
-position = Vector2(624, 8)
-rotation = 3.12844
+position = Vector2(624.103, 23.6364)
+rotation = 3.14159
 
 [connection signal="Timeout" from="." to="SpawnTimer" method="SpawnTime"]
 [connection signal="timeout" from="SpawnTimer" to="." method="SpawnTime"]

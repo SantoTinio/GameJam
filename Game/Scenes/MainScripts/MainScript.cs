@@ -14,7 +14,7 @@ public partial class MainScript : Node2D
     {
         _Warrior = GD.Load<PackedScene>("res://Game/Scenes/Entity/Warrior.tscn");
 	}
-	private float RandRange(float min, float max)
+	public float RandRange(float min, float max)
 	{
 		return (float)_Random.NextDouble() * (max - min) + min;
 	}
