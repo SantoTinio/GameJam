@@ -23,7 +23,6 @@ z_index = -1
 position = Vector2(50, 66)
 
 [node name="SpawnTimer" type="Timer" parent="." node_paths=PackedStringArray("_Main", "_MobSpawner")]
-wait_time = 0.581
 autostart = true
 script = ExtResource("4_yd472")
 _Main = NodePath("..")

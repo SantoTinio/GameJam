@@ -46,7 +46,7 @@ _stats = NodePath("../Stats")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_bjbqy")
 
-[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("_warrior", "_stats", "_hitbox")]
+[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("_warrior", "_stats", "_hitbox") groups=["Mob"]]
 visible = false
 script = ExtResource("3_nkt8q")
 _warrior = NodePath("..")
