@@ -13,13 +13,10 @@ public partial class Controller : Node2D
 	private Vector2 _direction = new Vector2();
 	private Vector2 targetPosition = new Vector2();
 	private CharacterBody2D _player;
-	//private Area2D _playerBullet;
 	public override void _Ready()
 	{
 		_stats = _warrior.GetStats();
 		_player =  GetNode<CharacterBody2D>("/root/Main/Goom");
-		//_playerBullet = GetNode<Area2D>("res://Game/Scenes/Bullet/bullet.tscn");
-		GD.Print("Enemy Controller Ready!");
 	}
 
 	public override void _PhysicsProcess(double delta)

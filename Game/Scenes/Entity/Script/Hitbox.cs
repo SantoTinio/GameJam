@@ -9,6 +9,5 @@ public partial class Hitbox : Area2D
 	public void onHit(Node2D controller)
 	{
 		_stats.Health -= PlayerStats.BulletDamage;
-		GD.Print(_stats.Health);
 	}
 }

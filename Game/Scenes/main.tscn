@@ -1,10 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgf64mbsanc23"]
+[gd_scene load_steps=6 format=3 uid="uid://bgf64mbsanc23"]
 
+[ext_resource type="Script" path="res://Game/Scenes/MainScripts/MainScript.cs" id="1_7rpwr"]
 [ext_resource type="PackedScene" uid="uid://dv3x3akj8hxq6" path="res://Game/Scenes/Player.tscn" id="1_gghrb"]
 [ext_resource type="PackedScene" uid="uid://b4mt6e8m52bgq" path="res://Game/Scenes/DebugMap.tscn" id="2_k2iu2"]
-[ext_resource type="PackedScene" uid="uid://c0182pabowdin" path="res://Game/Scenes/Entity/Warrior.tscn" id="3_au2qn"]
+[ext_resource type="Script" path="res://Game/Scenes/MainScripts/SpawnTimer.cs" id="4_yd472"]
 
-[node name="Main" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_7h6k3"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 624, 8, 0, 0, 0, 0, 16, 16, 0, 0, 0, 0, 8, 352, 0, 0, 0, 0, 616, 344, 0, 0, 0, 0, 624, 8)
+}
+point_count = 5
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("_Timer")]
+script = ExtResource("1_7rpwr")
+_Timer = NodePath("SpawnTimer")
 
 [node name="Goom" parent="." instance=ExtResource("1_gghrb")]
 position = Vector2(128, 116)
@@ -13,5 +22,19 @@ position = Vector2(128, 116)
 z_index = -1
 position = Vector2(50, 66)
 
-[node name="Human1" parent="." instance=ExtResource("3_au2qn")]
-position = Vector2(307, 124)
+[node name="SpawnTimer" type="Timer" parent="." node_paths=PackedStringArray("_Main", "_MobSpawner")]
+wait_time = 0.581
+autostart = true
+script = ExtResource("4_yd472")
+_Main = NodePath("..")
+_MobSpawner = NodePath("../MobPath/MobSpawner")
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_7h6k3")
+
+[node name="MobSpawner" type="PathFollow2D" parent="MobPath"]
+position = Vector2(624, 8)
+rotation = 3.12844
+
+[connection signal="Timeout" from="." to="SpawnTimer" method="SpawnTime"]
+[connection signal="timeout" from="SpawnTimer" to="." method="SpawnTime"]

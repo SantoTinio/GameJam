@@ -4,6 +4,7 @@ public partial class Warrior : CharacterBody2D
 {
 	[Export]
 	private Stats _stats;
+	public Vector2 SpawnPosition;
 	
 	public void SetStats(Stats stats)
 	{
@@ -12,5 +13,9 @@ public partial class Warrior : CharacterBody2D
 	public Stats GetStats()
 	{
 		return _stats;
+	}
+	public override void _Ready()
+	{
+		Position = SpawnPosition;
 	}
 }
