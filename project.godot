@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="Game Jam"
-run/main_scene="res://Game/Scenes/main.tscn"
+run/main_scene="res://Game/Scenes/Main.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://Assets/Sprites/icon.svg"
+
+[autoload]
+
+PlayerStats="*res://Game/Scenes/Player/PlayerStats.cs"
 
 [display]
 

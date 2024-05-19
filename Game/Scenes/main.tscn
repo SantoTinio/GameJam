@@ -1,17 +1,17 @@
 [gd_scene load_steps=4 format=3 uid="uid://bgf64mbsanc23"]
 
-[ext_resource type="PackedScene" uid="uid://dv3x3akj8hxq6" path="res://Game/Scenes/Player.tscn" id="1_datae"]
-[ext_resource type="PackedScene" uid="uid://b4mt6e8m52bgq" path="res://Game/Scenes/debug_map.tscn" id="2_5apwf"]
-[ext_resource type="PackedScene" uid="uid://c0182pabowdin" path="res://Game/Scenes/Entity/human_1.tscn" id="3_ukabs"]
+[ext_resource type="PackedScene" uid="uid://dv3x3akj8hxq6" path="res://Game/Scenes/Player.tscn" id="1_gghrb"]
+[ext_resource type="PackedScene" uid="uid://b4mt6e8m52bgq" path="res://Game/Scenes/DebugMap.tscn" id="2_k2iu2"]
+[ext_resource type="PackedScene" uid="uid://c0182pabowdin" path="res://Game/Scenes/Entity/Warrior.tscn" id="3_au2qn"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Goom" parent="." instance=ExtResource("1_datae")]
+[node name="Goom" parent="." instance=ExtResource("1_gghrb")]
 position = Vector2(128, 116)
 
-[node name="DebugMap" parent="." instance=ExtResource("2_5apwf")]
+[node name="DebugMap" parent="." instance=ExtResource("2_k2iu2")]
 z_index = -1
 position = Vector2(50, 66)
 
-[node name="Human1" parent="." instance=ExtResource("3_ukabs")]
+[node name="Human1" parent="." instance=ExtResource("3_au2qn")]
 position = Vector2(307, 124)

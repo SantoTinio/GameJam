@@ -1,22 +1,14 @@
 using Godot;
-public partial class PlayerStats : Node2D
+public partial class PlayerStats : Node
 {
-	[Export]
-	public float health = 5.00f;
-	[Export]
-	public float speed = 35.00f;
-	[Export]
-	public float maxHealth = 10.00f;
-	[Export]
-	public float SprintFactor = 1.5f;
-	[Export]
-	public float Accel = 0.35f;
-	[Export]
-	public float Decel = 0.5f;
-	[Export]
-	public float fireRate = 1;
-	[Export]
-	public int dashCount = 2;
-	[Export]
-	public int maxDashCount = 2;
+	public static float Health = 5.00f;
+	public static float Speed = 35.00f;
+	public static float MaxHealth = 10.00f;
+	public static float SprintFactor = 1.5f;
+	public static float Accel = 0.35f;
+	public static float Decel = 0.5f;
+	public static float FireRate = 1;
+	public static int DashCount = 2;
+	public static int MaxDashCount = 2;
+	public static int BulletDamage = 1;
 }

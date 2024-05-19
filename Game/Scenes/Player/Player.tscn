@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://Game/Scenes/Player/Player.cs" id="1_y0ut5"]
 [ext_resource type="Texture2D" uid="uid://b4m48vvrb7epu" path="res://Assets/Sprites/Goom/Goon_Anims.png" id="2_u2k3l"]
-[ext_resource type="Script" path="res://Game/Scenes/Player/playerAnimation.cs" id="5_ewc2k"]
+[ext_resource type="Script" path="res://Game/Scenes/Player/PlayerAnimation.cs" id="5_ewc2k"]
 [ext_resource type="Script" path="res://Game/Scenes/Player/Marker.cs" id="6_a362q"]
-[ext_resource type="PackedScene" uid="uid://dfh5v7tv15823" path="res://Game/Scenes/Player/player_stats.tscn" id="7_nflbj"]
-[ext_resource type="PackedScene" uid="uid://bufmn53teodym" path="res://Game/Scenes/Player/player_controller.tscn" id="8_7p4i2"]
+[ext_resource type="PackedScene" path="res://Game/Scenes/Player/player_stats.tscn" id="7_nflbj"]
+[ext_resource type="PackedScene" uid="uid://bufmn53teodym" path="res://Game/Scenes/Player/PlayerController.tscn" id="8_7p4i2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_snjux"]
 atlas = ExtResource("2_u2k3l")

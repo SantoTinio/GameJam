@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class human1 : CharacterBody2D
+public partial class Warrior : CharacterBody2D
 {
 	[Export]
 	private Stats _stats;

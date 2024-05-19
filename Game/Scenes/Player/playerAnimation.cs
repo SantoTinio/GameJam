@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class playerAnimation : AnimatedSprite2D
+public partial class PlayerAnimation : AnimatedSprite2D
 {
 	[Export] 
 	private Player _player;

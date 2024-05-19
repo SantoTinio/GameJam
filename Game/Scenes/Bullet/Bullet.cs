@@ -25,4 +25,8 @@ public partial class Bullet : Area2D
 			QueueFree();
 		}	
     }
+	public void _on_hit(Area2D area)
+	{
+		_bulletStats.Visible = false;
+	}
 }

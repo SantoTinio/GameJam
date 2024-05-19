@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0182pabowdin"]
+[gd_scene load_steps=10 format=3 uid="uid://c0182pabowdin"]
 
-[ext_resource type="Script" path="res://Game/Scenes/Entity/Script/human1.cs" id="1_ldjus"]
+[ext_resource type="Script" path="res://Game/Scenes/Entity/Script/Warrior.cs" id="1_ldjus"]
 [ext_resource type="Texture2D" uid="uid://bgrbxc5kg7mt0" path="res://Assets/Sprites/icon.svg" id="2_4duei"]
 [ext_resource type="Script" path="res://Game/Scenes/Entity/Script/Controller.cs" id="3_nkt8q"]
+[ext_resource type="Script" path="res://Game/Scenes/Entity/Script/Hitbox.cs" id="3_stcs6"]
 [ext_resource type="Script" path="res://Game/Scenes/Entity/Script/Stats.cs" id="4_tt0po"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ye7o"]
@@ -26,7 +27,7 @@ size = Vector2(35, 19)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bjbqy"]
 size = Vector2(34, 34)
 
-[node name="Human1" type="CharacterBody2D" node_paths=PackedStringArray("_stats")]
+[node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("_stats")]
 script = ExtResource("1_ldjus")
 _stats = NodePath("Stats")
 
@@ -38,18 +39,24 @@ sprite_frames = SubResource("SpriteFrames_vg5fg")
 position = Vector2(0.5, 6.5)
 shape = SubResource("RectangleShape2D_l1wl1")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("_stats")]
+script = ExtResource("3_stcs6")
+_stats = NodePath("../Stats")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("RectangleShape2D_bjbqy")
 
-[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("_human", "_stats")]
+[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("_warrior", "_stats", "_hitbox")]
 visible = false
 script = ExtResource("3_nkt8q")
-_human = NodePath("..")
+_warrior = NodePath("..")
 _stats = NodePath("../Stats")
+_hitbox = NodePath("../Hitbox")
 
 [node name="Stats" type="Node2D" parent="."]
 visible = false
 script = ExtResource("4_tt0po")
 Speed = 40.0
+
+[connection signal="area_entered" from="Hitbox" to="Controller" method="onHit"]
+[connection signal="Hit" from="Controller" to="Hitbox" method="onHit"]
