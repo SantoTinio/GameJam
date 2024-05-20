@@ -11,9 +11,9 @@ _data = {
 }
 point_count = 5
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("_Timer")]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("_timer")]
 script = ExtResource("1_7rpwr")
-_Timer = NodePath("SpawnTimer")
+_timer = NodePath("SpawnTimer")
 
 [node name="Goom" parent="." instance=ExtResource("1_gghrb")]
 position = Vector2(128, 116)
@@ -22,11 +22,12 @@ position = Vector2(128, 116)
 z_index = -1
 position = Vector2(50, 66)
 
-[node name="SpawnTimer" type="Timer" parent="." node_paths=PackedStringArray("_Main", "_MobSpawner")]
+[node name="SpawnTimer" type="Timer" parent="." node_paths=PackedStringArray("_main", "_mobSpawner")]
+wait_time = 0.5
 autostart = true
 script = ExtResource("4_yd472")
-_Main = NodePath("..")
-_MobSpawner = NodePath("../MobPath/MobSpawner")
+_main = NodePath("..")
+_mobSpawner = NodePath("../MobPath/MobSpawner")
 
 [node name="MobPath" type="Path2D" parent="."]
 position = Vector2(-8.20779, -16.7619)

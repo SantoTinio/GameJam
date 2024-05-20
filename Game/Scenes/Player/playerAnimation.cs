@@ -4,28 +4,26 @@ public partial class PlayerAnimation : AnimatedSprite2D
 {
 	[Export] 
 	private Player _player;
-	private double angle;
+	private double _angle;
 
 	public void _updateAnimation()
 	{
-		angle = GetGlobalMousePosition().AngleToPoint(_player.Position);
-		if (angle > -0.8 && angle < 0.6)
+		_angle = GetGlobalMousePosition().AngleToPoint(_player.Position);
+		switch (_angle)
 		{
-			Play("Left");
+			case > -0.8 and < 0.6:
+				Play("Left");
+				break;
+			case >= 0.6 and < 2.6:
+				Play("Up");
+				break;
+			case >= 2.6 and <= 3.14:
+			case <= -2.14 and >= -3.14:
+				Play("Right");
+				break;
+			default:
+				Play("Down");
+				break;
 		}
-		else if (angle >= 0.6 && angle < 2.6)
-		{
-			Play("Up");
-		}
-		else if ((angle >= 2.6 && angle <= 3.14) || (angle <= -2.14 && angle >= -3.14))
-		{
-			Play("Right");
-		}
-		else 
-		{
-			Play("Down");
-		}
-		
-
 	}
 }

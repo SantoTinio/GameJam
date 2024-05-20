@@ -4,22 +4,22 @@ using System;
 public partial class MainScript : Node2D
 {
 	[Export]
-	private Timer _Timer;
+	private Timer _timer;
 	[Signal]
 	public delegate void TimeoutEventHandler();
-	public PackedScene _Warrior;
-	public Random _Random = new Random();
+	public PackedScene Warrior;
+	public readonly Random Random = new();
 
     public override void _Ready()
     {
-        _Warrior = GD.Load<PackedScene>("res://Game/Scenes/Entity/Warrior.tscn");
+        Warrior = GD.Load<PackedScene>("res://Game/Scenes/Entity/Warrior.tscn");
 	}
 	public float RandRange(float min, float max)
 	{
-		return (float)_Random.NextDouble() * (max - min) + min;
+		return (float)Random.NextDouble() * (max - min) + min;
 	}
 
-	public void SpawnTime()
+	private void SpawnTime()
 	{
 		EmitSignal(SignalName.Timeout);
 	}

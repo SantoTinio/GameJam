@@ -14,12 +14,12 @@ public partial class PlayerController : Node2D
 	private PackedScene Bullet;
 	private Vector2 _inputDirection = new Vector2();
 	private Vector2 _movement = new Vector2();
-	private double dashTime = 0;
-	private bool dashed = false;
-	private double dashTimer;
-	private double DashCooldown;
-	private double time = 10;
-	private double maxTime = 1.0;
+	private double _dashTime = 0;
+	private bool _dashed = false;
+	private double _dashTimer;
+	private double _dashCooldown;
+	private double _time = 10;
+	private double _maxTime = 1.0;
 	private float _initSpeed = 35.0f;
 
 	public override void _Ready()
@@ -39,35 +39,29 @@ public partial class PlayerController : Node2D
 		);
 		
 		//Slime dash
-		if (!isDashReady() || dashed || PlayerStats.DashCount != PlayerStats.MaxDashCount)
+		if (!IsDashReady() || _dashed || PlayerStats.DashCount != PlayerStats.MaxDashCount)
 		{
 			//return to ogSpeed
-			if (dashed)	returnSpeed(delta);
+			if (_dashed)	ReturnSpeed(delta);
 			//Cooldown the dash
-			DashCooldown += delta;
-			if (DashCooldown > 5.0)
+			_dashCooldown += delta;
+			if (_dashCooldown > 5.0)
 			{
 				PlayerStats.DashCount += 1;
-				DashCooldown = 0;
+				_dashCooldown = 0;
 				GD.Print("Dashes:" + PlayerStats.DashCount);
 			} 
 		}	
 		// Auto Run
-		float SpeedMultiplier = Input.IsActionJustPressed("Run") ? 1.0f : PlayerStats.SprintFactor;
+		var speedMultiplier = Input.IsActionJustPressed("Run") ? 1.0f : PlayerStats.SprintFactor;
 
 		_movement = _inputDirection.LimitLength(1.0f);
-		if (_movement != Vector2.Zero)
-		{
-			_player.Velocity = _player.Velocity.Lerp(_movement * PlayerStats.Speed * SpeedMultiplier, PlayerStats.Accel);
-		}
-		else
-		{
-			_player.Velocity = _player.Velocity.Lerp(Vector2.Zero, PlayerStats.Decel);
-			
-		}
+		_player.Velocity = _movement != Vector2.Zero
+			? _player.Velocity.Lerp(_movement * PlayerStats.Speed * speedMultiplier, PlayerStats.Accel)
+			: _player.Velocity.Lerp(Vector2.Zero, PlayerStats.Decel);
 
 		//shoot
-		shootIt(delta);
+		ShootIt(delta);
 		//MOVE THE PLAYER!
 		_player.MoveAndSlide();
 	}
@@ -86,11 +80,11 @@ public partial class PlayerController : Node2D
 		if (@event.IsActionPressed("Dash"))
 		{
 			GD.Print("dashing");
-			if (isDashReady())
+			if (IsDashReady())
 			{
 				PlayerStats.Speed = 1300;
 				PlayerStats.DashCount -= 1;
-				dashed = true;
+				_dashed = true;
 			}
 		}
 		if (@event.IsActionPressed("LevelUp"))
@@ -107,44 +101,40 @@ public partial class PlayerController : Node2D
 		}
     }
 	//Bullet Spawning function
-    private void shootIt(double delta)
+    private void ShootIt(double delta)
 	{
-		var _bullet = (Bullet)Bullet.Instantiate();
+		var bullet = (Bullet)Bullet.Instantiate();
 		var direction = Vector2.Right.Rotated(_player.Position.AngleToPoint(GetGlobalMousePosition()));
-		if (isBulletReady(delta))
+		if (IsBulletReady(delta))
 		{
-			_player.AddChild(_bullet);
-			_bullet.direction = direction;
-			_bullet.LookAt(_player.GetGlobalMousePosition());
-			_bullet.spawnLocation = _marker.Position;
-			_bullet.targetLocation = GetGlobalMousePosition();
+			_player.AddChild(bullet);
+			bullet.Direction = direction;
+			bullet.LookAt(_player.GetGlobalMousePosition());
+			bullet.SpawnLocation = _marker.Position;
+			bullet.TargetLocation = GetGlobalMousePosition();
 		}
-		else return;
 	}
 	//Checks if player has dash!
-	private bool isDashReady()
+	private static bool IsDashReady()
 	{
-		if (PlayerStats.DashCount > 0 && PlayerStats.DashCount <= PlayerStats.MaxDashCount)	return true;
-		else return false;
+		return PlayerStats.DashCount > 0 && PlayerStats.DashCount <= PlayerStats.MaxDashCount;
 	}
 	//Returns player Speed to original Speed after the dash frame
-	private void returnSpeed(double delta)
+	private void ReturnSpeed(double delta)
 	{
-		dashTimer += delta;
-		if (dashTimer > 0.0167)
-		{
-			PlayerStats.Speed = _initSpeed;
-			dashTimer = 0.0;
-			dashed = false;
-		}
+		_dashTimer += delta;
+		if (!(_dashTimer > 0.0167)) return;
+		PlayerStats.Speed = _initSpeed;
+		_dashTimer = 0.0;
+		_dashed = false;
 	}
 	//Bullet Cooldown!
-	private bool isBulletReady(double delta)
+	private bool IsBulletReady(double delta)
 	{
-		time += delta * PlayerStats.FireRate;
-		if (time < maxTime) return false;
+		_time += delta * PlayerStats.FireRate;
+		if (_time < _maxTime) return false;
 		else {
-			time = 0;
+			_time = 0;
 			return true;
 		}
 	}

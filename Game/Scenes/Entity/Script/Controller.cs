@@ -10,8 +10,8 @@ public partial class Controller : Node2D
 	private Hitbox _hitbox;
 	[Signal] 
 	public delegate void HitEventHandler(Node2D node);
-	private Vector2 _direction = new Vector2();
-	private Vector2 targetPosition = new Vector2();
+	private Vector2 _direction;
+	private Vector2 _targetPosition;
 	private CharacterBody2D _player;
 	public override void _Ready()
 	{
@@ -21,8 +21,8 @@ public partial class Controller : Node2D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		targetPosition = _player.Position;
-		_direction = (targetPosition - _warrior.Position).Normalized();
+		_targetPosition = _player.Position;
+		_direction = (_targetPosition - _warrior.Position).Normalized();
 
 		_warrior.Velocity = _direction * _stats.Speed;
 		

@@ -3,7 +3,7 @@ using Godot;
 public partial class bulletSprite : Sprite2D
 {
 	[Export]
-	public float damage = 1.5f;
+	public float Damage = 1.5f;
 	[Export]
-	public float speed = 200.0f;
+	public float Speed = 200.0f;
 }
