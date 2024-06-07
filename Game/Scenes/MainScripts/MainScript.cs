@@ -21,6 +21,8 @@ public partial class MainScript : Node2D
 
 	private void SpawnTime()
 	{
+		if (IsInGroup("Mob"))
+			GD.Print("TEST");
 		EmitSignal(SignalName.Timeout);
 	}
 }

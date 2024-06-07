@@ -10,9 +10,10 @@ public partial class SpawnTimer : Timer
 	public void SpawnTime()
 	{
 		_mobSpawner.Progress = _main.Random.Next();
-		var warrior = (Warrior)_main.Warrior.Instantiate();
+		var warrior = (UnarmedWarrior)_main.Warrior.Instantiate();
+		warrior.AddToGroup("Mob");
 		_main.AddChild(warrior);
-		GD.Print( _mobSpawner.Position);
+		//GD.Print( _mobSpawner.Position);
 		
 
 		warrior.Position = _mobSpawner.Position;

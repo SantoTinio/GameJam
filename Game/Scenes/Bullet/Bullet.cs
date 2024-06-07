@@ -24,9 +24,10 @@ public partial class Bullet : Area2D
 		{
 			QueueFree();
 		}	
+		if (_life < 1) QueueFree();
     }
-	public void _on_hit(Area2D area)
+	public void _on_hit(Area2D node)
 	{
-		_bulletStats.Visible = false;
+		_life -= 1;
 	}
 }

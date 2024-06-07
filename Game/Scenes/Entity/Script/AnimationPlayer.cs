@@ -3,8 +3,6 @@ using System;
 
 public partial class AnimationPlayer : AnimatedSprite2D
 {
-	[Export] 
-	private Warrior _warrior;
 	private double _angle;
 
 	public void _UpdateAnimation(Boolean isMoving, CharacterBody2D player, CharacterBody2D entity)

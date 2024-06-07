@@ -7,8 +7,6 @@ public partial class PlayerController : Node2D
 	private PlayerAnimation _anims;
 	[Export]
 	private Marker _marker;
-	//[Export]
-	//private Bullet _bullet;
 	//[Signal]
 	//public delegate void HitEventHandler(Node2D node);
 	private PackedScene Bullet;
