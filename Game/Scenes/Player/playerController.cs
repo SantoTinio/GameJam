@@ -7,9 +7,7 @@ public partial class PlayerController : Node2D
 	private PlayerAnimation _anims;
 	[Export]
 	private Marker _marker;
-	//[Signal]
-	//public delegate void HitEventHandler(Node2D node);
-	private PackedScene Bullet;
+	private PackedScene _bullet;
 	private Vector2 _inputDirection = new Vector2();
 	private Vector2 _movement = new Vector2();
 	private double _dashTime = 0;
@@ -23,7 +21,7 @@ public partial class PlayerController : Node2D
 	public override void _Ready()
 	{
 
-		Bullet = GD.Load<PackedScene>("res://Game/Scenes/Bullet/bullet.tscn");
+		_bullet = GD.Load<PackedScene>("res://Game/Scenes/Bullet/bullet.tscn");
 		GD.Print("Controller is Ready!");
 	}
 
@@ -101,7 +99,7 @@ public partial class PlayerController : Node2D
 	//Bullet Spawning function
     private void ShootIt(double delta)
 	{
-		var bullet = (Bullet)Bullet.Instantiate();
+		var bullet = (Bullet)_bullet.Instantiate();
 		var direction = Vector2.Right.Rotated(_player.Position.AngleToPoint(GetGlobalMousePosition()));
 		if (IsBulletReady(delta))
 		{
