@@ -1,42 +1,122 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0182pabowdin"]
+[gd_scene load_steps=21 format=3 uid="uid://c0182pabowdin"]
 
 [ext_resource type="Script" path="res://Game/Scenes/Entity/Script/Warrior.cs" id="1_ldjus"]
-[ext_resource type="Texture2D" uid="uid://bgrbxc5kg7mt0" path="res://Assets/Sprites/icon.svg" id="2_4duei"]
+[ext_resource type="Texture2D" uid="uid://dhw7tdo4ndo6" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1DownIdle.png" id="2_cl0t2"]
+[ext_resource type="Texture2D" uid="uid://8tp76f848a8t" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1DownWalk1.png" id="3_miakc"]
 [ext_resource type="Script" path="res://Game/Scenes/Entity/Script/Controller.cs" id="3_nkt8q"]
 [ext_resource type="Script" path="res://Game/Scenes/Entity/Script/Hitbox.cs" id="3_stcs6"]
+[ext_resource type="Texture2D" uid="uid://5vsgmncy6ylk" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1DownWalk2.png" id="4_obxva"]
 [ext_resource type="Script" path="res://Game/Scenes/Entity/Script/Stats.cs" id="4_tt0po"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2ye7o"]
-atlas = ExtResource("2_4duei")
-region = Rect2(0, 0, 128, 128)
+[ext_resource type="Texture2D" uid="uid://ergcxcdl1kp0" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1LeftIdle.png" id="5_yme82"]
+[ext_resource type="Texture2D" uid="uid://d2b6keg20mac6" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1LeftWalk1.png" id="6_njciv"]
+[ext_resource type="Texture2D" uid="uid://dl8uy7r7fpb5i" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1LeftWalk2.png" id="7_uc7hg"]
+[ext_resource type="Texture2D" uid="uid://no2ro60ilmqx" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1RightIdle.png" id="8_bq0x8"]
+[ext_resource type="Texture2D" uid="uid://ct81xk7r1rip0" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1RightWalk1.png" id="9_jyp6a"]
+[ext_resource type="Texture2D" uid="uid://dakakb2lrnp8k" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1RightWalk2.png" id="10_v8oag"]
+[ext_resource type="Texture2D" uid="uid://cdfbobm3aosrk" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1UpIdle.png" id="11_e8an2"]
+[ext_resource type="Texture2D" uid="uid://coqmyyjt2ouw" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1UpWalk1.png" id="12_51oh4"]
+[ext_resource type="Texture2D" uid="uid://58n1dxuv6t6d" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1UpWalk2.png" id="13_j41dq"]
+[ext_resource type="Script" path="res://Game/Scenes/Entity/Script/AnimationPlayer.cs" id="14_t0tuf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vg5fg"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2ye7o")
+"texture": ExtResource("2_cl0t2")
 }],
 "loop": true,
-"name": &"default",
+"name": &"DownIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_miakc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_obxva")
+}],
+"loop": true,
+"name": &"DownWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_yme82")
+}],
+"loop": true,
+"name": &"LeftIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_njciv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_uc7hg")
+}],
+"loop": true,
+"name": &"LeftWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_bq0x8")
+}],
+"loop": true,
+"name": &"RightIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_jyp6a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_v8oag")
+}],
+"loop": true,
+"name": &"RightWalk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_e8an2")
+}],
+"loop": true,
+"name": &"UpIdle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_51oh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_j41dq")
+}],
+"loop": true,
+"name": &"UpWalk",
 "speed": 5.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wl1"]
-size = Vector2(35, 19)
+size = Vector2(7, 9.375)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjbqy"]
-size = Vector2(34, 34)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0ytqr"]
+radius = 4.0
+height = 16.0
 
 [node name="Warrior" type="CharacterBody2D" node_paths=PackedStringArray("_stats")]
 script = ExtResource("1_ldjus")
 _stats = NodePath("Stats")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.289063, 0.28125)
+[node name="AnimationPlayer" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_warrior")]
+scale = Vector2(1.029, 1)
 sprite_frames = SubResource("SpriteFrames_vg5fg")
+animation = &"DownWalk"
+script = ExtResource("14_t0tuf")
+_warrior = NodePath("..")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 6.5)
+position = Vector2(0.5, 3.3125)
 shape = SubResource("RectangleShape2D_l1wl1")
 
 [node name="Hitbox" type="Area2D" parent="." node_paths=PackedStringArray("_stats")]
@@ -44,14 +124,15 @@ script = ExtResource("3_stcs6")
 _stats = NodePath("../Stats")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-shape = SubResource("RectangleShape2D_bjbqy")
+shape = SubResource("CapsuleShape2D_0ytqr")
 
-[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("_warrior", "_stats", "_hitbox") groups=["Mob"]]
+[node name="Controller" type="Node2D" parent="." node_paths=PackedStringArray("_warrior", "_stats", "_hitbox", "_animationPlayer") groups=["Mob"]]
 visible = false
 script = ExtResource("3_nkt8q")
 _warrior = NodePath("..")
 _stats = NodePath("../Stats")
 _hitbox = NodePath("../Hitbox")
+_animationPlayer = NodePath("../AnimationPlayer")
 
 [node name="Stats" type="Node2D" parent="."]
 visible = false
