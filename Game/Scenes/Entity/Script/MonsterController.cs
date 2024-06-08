@@ -25,7 +25,7 @@ public partial class MonsterController : Node
         entity.MoveAndSlide();
     }
 
-    public void SetHealth(int health)
+    public void SetHealth(float health)
     {
         _stats.SetHealth(health);
     }
@@ -40,7 +40,7 @@ public partial class MonsterController : Node
         return _stats.GetDamage();
     }
 
-    public int GetHealth()
+    public float GetHealth()
     {
         return _stats.GetHealth();
     }

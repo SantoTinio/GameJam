@@ -7,9 +7,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4dj81"]
 size = Vector2(5, 6)
 
-[node name="Bullet" type="Area2D" node_paths=PackedStringArray("_bulletStats")]
+[node name="Bullet" type="Area2D"]
 script = ExtResource("1_wl451")
-_bulletStats = NodePath("bulletSprite")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)

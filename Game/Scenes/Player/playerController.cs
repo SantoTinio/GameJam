@@ -8,10 +8,10 @@ public partial class PlayerController : Node2D
 	[Export]
 	private Marker _marker;
 	private PackedScene _bullet;
-	private Vector2 _inputDirection = new Vector2();
-	private Vector2 _movement = new Vector2();
-	private double _dashTime = 0;
-	private bool _dashed = false;
+	private Vector2 _inputDirection;
+	private Vector2 _movement;
+	private double _dashTime;
+	private bool _dashed;
 	private double _dashTimer;
 	private double _dashCooldown;
 	private double _time = 10;
@@ -20,7 +20,6 @@ public partial class PlayerController : Node2D
 
 	public override void _Ready()
 	{
-
 		_bullet = GD.Load<PackedScene>("res://Game/Scenes/Bullet/bullet.tscn");
 		GD.Print("Controller is Ready!");
 	}
@@ -51,7 +50,7 @@ public partial class PlayerController : Node2D
 		// Auto Run
 		var speedMultiplier = Input.IsActionJustPressed("Run") ? 1.0f : PlayerStats.SprintFactor;
 
-		_movement = _inputDirection.LimitLength(1.0f);
+		_movement = _inputDirection.LimitLength();
 		_player.Velocity = _movement != Vector2.Zero
 			? _player.Velocity.Lerp(_movement * PlayerStats.Speed * speedMultiplier, PlayerStats.Accel)
 			: _player.Velocity.Lerp(Vector2.Zero, PlayerStats.Decel);
@@ -134,8 +133,4 @@ public partial class PlayerController : Node2D
 			return true;
 		}
 	}
-	/*private void onHit(Node2D node)
-	{
-		EmitSignal(SignalName.Hit, node);
-	}*/
 }

@@ -3,7 +3,7 @@ using Godot;
 
 public partial class MonsterStats : Node
 {
-    private int _health;
+    private float _health;
     private float _speed;
     private int _damage;
 
@@ -14,12 +14,12 @@ public partial class MonsterStats : Node
         _damage = damage;
     }
 
-    public void SetHealth(int health)
+    public void SetHealth(float health)
     {
         _health = health;
     }
 
-    public int GetHealth()
+    public float GetHealth()
     {
         return _health;
     }
