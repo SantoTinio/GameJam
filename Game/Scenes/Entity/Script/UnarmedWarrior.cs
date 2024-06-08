@@ -6,9 +6,8 @@ public partial class UnarmedWarrior : CharacterBody2D
 	[Export] private AnimationPlayer _anims;
 	[Export] private MonsterController _controller;
 
-	[Signal]
+	[Signal] 
 	public delegate void HitEventHandler(Node2D node);
-	//private MonsterController _controller = new MonsterController();
 	private CharacterBody2D _player;
 
 	public override void _Ready()

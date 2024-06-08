@@ -1,3 +1,4 @@
+using System;
 using Godot;
 public partial class PlayerController : Node2D
 {
@@ -7,6 +8,8 @@ public partial class PlayerController : Node2D
 	private PlayerAnimation _anims;
 	[Export]
 	private Marker _marker;
+	/*[Signal]
+	public delegate void EnemyHitEventHandler(Node2D node);*/
 	private PackedScene _bullet;
 	private Vector2 _inputDirection;
 	private Vector2 _movement;
@@ -133,4 +136,9 @@ public partial class PlayerController : Node2D
 			return true;
 		}
 	}
+
+	/*private void OnHit(Node2D node)
+	{
+		EmitSignal(SignalName.EnemyHit, node);
+	}*/
 }

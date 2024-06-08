@@ -19,7 +19,7 @@ public partial class MonsterController : Node
         //Get Range when in Dungeon Crawler Mode
         _targetPos = player.Position;
         _direction = (_targetPos - entity.Position).Normalized();
-        entity.Velocity = _direction * _stats.GetSpeed();
+        entity.Velocity = _direction * _stats.Speed;
         _isMoving = true;
 
         entity.MoveAndSlide();
@@ -27,7 +27,7 @@ public partial class MonsterController : Node
 
     public void SetHealth(float health)
     {
-        _stats.SetHealth(health);
+        _stats.Health = health;
     }
 
     public bool GetMoving()
@@ -37,12 +37,12 @@ public partial class MonsterController : Node
 
     public int GetDamage()
     {
-        return _stats.GetDamage();
+        return _stats.Damage;
     }
 
     public float GetHealth()
     {
-        return _stats.GetHealth();
+        return _stats.Health;
     }
     
 }

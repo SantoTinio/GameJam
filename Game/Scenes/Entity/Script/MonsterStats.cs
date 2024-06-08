@@ -1,36 +1,36 @@
-namespace GameJam.Game.Scenes.Entity.Script;
 using Godot;
 
 public partial class MonsterStats : Node
 {
-    private float _health;
-    private float _speed;
-    private int _damage;
+    public float Health;
+    public float Speed;
+    public int Damage;
 
     public void SetStats(int health, float speed, int damage)
     {
-        _health = health;
-        _speed = speed;
-        _damage = damage;
+        Health = health;
+        Speed = speed;
+        Damage = damage;
     }
+    /*
 
     public void SetHealth(float health)
     {
-        _health = health;
+        Health = health;
     }
 
     public float GetHealth()
     {
-        return _health;
+        return Health;
     }
 
     public int GetDamage()
     {
-        return _damage;
+        return Damage;
     }
 
     public float GetSpeed()
     {
-        return _speed;
-    }
+        return Speed;
+    }*/
 }
