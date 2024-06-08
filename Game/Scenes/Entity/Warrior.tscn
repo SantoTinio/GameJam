@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://c0182pabowdin"]
+[gd_scene load_steps=20 format=3 uid="uid://c0182pabowdin"]
 
 [ext_resource type="Script" path="res://Game/Scenes/Entity/Script/UnarmedWarrior.cs" id="1_vdwlf"]
 [ext_resource type="Texture2D" uid="uid://dhw7tdo4ndo6" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1DownIdle.png" id="2_cl0t2"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://coqmyyjt2ouw" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1UpWalk1.png" id="12_51oh4"]
 [ext_resource type="Texture2D" uid="uid://58n1dxuv6t6d" path="res://Assets/Sprites/DungeonGoons/Ground/Skeleton/Unarmed/SkellyT1UpWalk2.png" id="13_j41dq"]
 [ext_resource type="Script" path="res://Game/Scenes/Entity/Script/AnimationPlayer.cs" id="14_t0tuf"]
+[ext_resource type="PackedScene" uid="uid://j1khh2k8vytc" path="res://Game/Scenes/Entity/monster_controller.tscn" id="16_vrwlt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vg5fg"]
 animations = [{
@@ -102,9 +103,10 @@ size = Vector2(7, 9.375)
 radius = 5.0
 height = 16.0
 
-[node name="UnarmedWarrior" type="CharacterBody2D" node_paths=PackedStringArray("_anims")]
+[node name="UnarmedWarrior" type="CharacterBody2D" node_paths=PackedStringArray("_anims", "_controller")]
 script = ExtResource("1_vdwlf")
 _anims = NodePath("AnimationPlayer")
+_controller = NodePath("MonsterController")
 
 [node name="AnimationPlayer" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.029, 1)
@@ -123,6 +125,8 @@ _monster = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0.5, 0)
 shape = SubResource("CapsuleShape2D_0ytqr")
+
+[node name="MonsterController" parent="." instance=ExtResource("16_vrwlt")]
 
 [connection signal="Hit" from="." to="Hitbox" method="onHit"]
 [connection signal="area_entered" from="Hitbox" to="." method="OnHit"]

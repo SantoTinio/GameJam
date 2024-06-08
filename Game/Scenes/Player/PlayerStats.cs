@@ -11,4 +11,5 @@ public partial class PlayerStats : Node
 	public static int DashCount = 2;
 	public static int MaxDashCount = 2;
 	public static int BulletDamage = 1;
+	public static float BulletSpeed = 200.0f;
 }

@@ -4,10 +4,11 @@ using Godot;
 public partial class UnarmedWarrior : CharacterBody2D
 {
 	[Export] private AnimationPlayer _anims;
+	[Export] private MonsterController _controller;
 
 	[Signal]
 	public delegate void HitEventHandler(Node2D node);
-	private MonsterController _controller = new MonsterController();
+	//private MonsterController _controller = new MonsterController();
 	private CharacterBody2D _player;
 
 	public override void _Ready()
@@ -22,7 +23,7 @@ public partial class UnarmedWarrior : CharacterBody2D
 		_anims._UpdateAnimation(_controller.GetMoving(), _player, this);
 	}
 
-	public void OnHit(Node2D node)
+	private void OnHit(Node2D node)
 	{
 		EmitSignal(SignalName.Hit, node);
 	}
@@ -35,6 +36,7 @@ public partial class UnarmedWarrior : CharacterBody2D
 		
 		if (_controller.GetHealth() < 1)
 			QueueFree();
-		//_controller.SetHealth(_controller.GetHealth()-_controller.GetDamage());
+		
+		_controller.SetHealth(_controller.GetHealth()-PlayerStats.BulletDamage);
 	}
 }

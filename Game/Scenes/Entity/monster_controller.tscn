@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://j1khh2k8vytc"]
+
+[ext_resource type="Script" path="res://Game/Scenes/Entity/Script/MonsterController.cs" id="1_p8i25"]
+
+[node name="MonsterController" type="Node"]
+script = ExtResource("1_p8i25")

@@ -1,8 +1,7 @@
 using Godot;
 public partial class Bullet : Area2D
 {
-	[Export]
-	private bulletSprite _bulletStats;
+
 	[Export]
 	public Vector2 SpawnLocation;
 	[Export]
@@ -14,7 +13,7 @@ public partial class Bullet : Area2D
 
     public override void _PhysicsProcess(double delta)
     {
-		var motion = Direction * _bulletStats.Speed * (float)delta;
+		var motion = Direction * PlayerStats.BulletSpeed * (float)delta;
 	
 		Position += motion;
 		
