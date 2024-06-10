@@ -17,7 +17,7 @@ config/icon="res://Assets/Sprites/icon.svg"
 
 [autoload]
 
-PlayerStats="*res://Game/Scenes/Player/PlayerStats.cs"
+PlayerStats="*res://Game/Scenes/Player/Scripts/PlayerStats.cs"
 MonsterStats="*res://Game/Scenes/Entity/Script/MonsterStats.cs"
 
 [display]

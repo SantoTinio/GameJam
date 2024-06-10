@@ -8,8 +8,8 @@ public partial class PlayerController : Node2D
 	private PlayerAnimation _anims;
 	[Export]
 	private Marker _marker;
-	/*[Signal]
-	public delegate void EnemyHitEventHandler(Node2D node);*/
+	[Signal]
+	public delegate void EnemyHitEventHandler(Node2D node);
 	private PackedScene _bullet;
 	private Vector2 _inputDirection;
 	private Vector2 _movement;
@@ -37,10 +37,10 @@ public partial class PlayerController : Node2D
 		);
 		
 		//Slime dash
-		if (!IsDashReady() || _dashed || PlayerStats.DashCount != PlayerStats.MaxDashCount)
+		if (!IsDashReady() || _dashed || Math.Abs(PlayerStats.DashCount - PlayerStats.MaxDashCount) > 0)
 		{
 			//return to ogSpeed
-			if (_dashed)	ReturnSpeed(delta);
+			if (_dashed) ReturnSpeed(delta);
 			//Cooldown the dash
 			_dashCooldown += delta;
 			if (_dashCooldown > 5.0)
@@ -57,14 +57,13 @@ public partial class PlayerController : Node2D
 		_player.Velocity = _movement != Vector2.Zero
 			? _player.Velocity.Lerp(_movement * PlayerStats.Speed * speedMultiplier, PlayerStats.Accel)
 			: _player.Velocity.Lerp(Vector2.Zero, PlayerStats.Decel);
-
+		//Marker Changes Position
 		//shoot
 		ShootIt(delta);
 		//MOVE THE PLAYER!
 		_player.MoveAndSlide();
 	}
-
-    public override void _Input(InputEvent @event)
+	public override void _Input(InputEvent @event)
     {
 		// debug Check! Left Click to see Player Stats
         if (@event.IsActionPressed("Shoot"))
@@ -103,14 +102,13 @@ public partial class PlayerController : Node2D
 	{
 		var bullet = (Bullet)_bullet.Instantiate();
 		var direction = Vector2.Right.Rotated(_player.Position.AngleToPoint(GetGlobalMousePosition()));
-		if (IsBulletReady(delta))
-		{
-			_player.AddChild(bullet);
-			bullet.Direction = direction;
-			bullet.LookAt(_player.GetGlobalMousePosition());
-			bullet.SpawnLocation = _marker.Position;
-			bullet.TargetLocation = GetGlobalMousePosition();
-		}
+		if (!IsBulletReady(delta)) return;
+		
+		_player.AddChild(bullet);
+		bullet.Direction = direction;
+		bullet.LookAt(_player.GetGlobalMousePosition());
+		bullet.SpawnLocation = _marker.Position;
+		bullet.TargetLocation = GetGlobalMousePosition();
 	}
 	//Checks if player has dash!
 	private static bool IsDashReady()
@@ -131,14 +129,14 @@ public partial class PlayerController : Node2D
 	{
 		_time += delta * PlayerStats.FireRate;
 		if (_time < _maxTime) return false;
-		else {
-			_time = 0;
-			return true;
-		}
+		
+		_time = 0;
+		return true;
+		
 	}
 
-	/*private void OnHit(Node2D node)
+	public void OnHit(Node2D node)
 	{
 		EmitSignal(SignalName.EnemyHit, node);
-	}*/
+	}
 }

@@ -8,12 +8,13 @@ public partial class PlayerStats : Node
 	public static readonly float Decel = 0.5f;
 	public static float FireRate; 
 	public static float BulletSpeed;
-	public static float BulletDamage; 
+	public static float BulletDamage;
+	public static float OrbitSpeed;
 	public static float DashCount; 
 	public static float MaxDashCount; 
 	private static int _playerType;
 
-	public static void SetStats(float health, float speed, float fireRate, float bulletSpeed, float damage,
+	public static void SetStats(float health, float speed, float fireRate, float bulletSpeed, float orbit, float damage,
 		 float dash, float maxDash, int type)
 	{
 		Health = health;
@@ -21,6 +22,7 @@ public partial class PlayerStats : Node
 		FireRate = fireRate;
 		BulletSpeed = bulletSpeed;
 		BulletDamage = damage;
+		OrbitSpeed = orbit;
 		DashCount = dash;
 		MaxDashCount = maxDash;
 		_playerType = type;

@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://cfkvisyo52s35"]
+[gd_scene load_steps=31 format=3 uid="uid://cfkvisyo52s35"]
 
-[ext_resource type="Script" path="res://Game/Scenes/Player/Player.cs" id="1_y0ut5"]
+[ext_resource type="Script" path="res://Game/Scenes/Player/Scripts/Player.cs" id="1_y0ut5"]
 [ext_resource type="Texture2D" uid="uid://b4m48vvrb7epu" path="res://Assets/Sprites/Goom/Goon_Anims.png" id="2_u2k3l"]
-[ext_resource type="Script" path="res://Game/Scenes/Player/PlayerAnimation.cs" id="5_ewc2k"]
-[ext_resource type="Script" path="res://Game/Scenes/Player/Marker.cs" id="6_a362q"]
-[ext_resource type="PackedScene" path="res://Game/Scenes/Player/player_stats.tscn" id="7_nflbj"]
+[ext_resource type="Script" path="res://Game/Scenes/Player/Scripts/PlayerAnimation.cs" id="5_ewc2k"]
+[ext_resource type="Script" path="res://Game/Scenes/Player/Scripts/DebugNode.cs" id="6_8osf6"]
+[ext_resource type="Script" path="res://Game/Scenes/Player/Scripts/Marker.cs" id="6_a362q"]
+[ext_resource type="Script" path="res://Game/Scenes/Player/Scripts/OrbitMarker.cs" id="7_16qop"]
 [ext_resource type="PackedScene" uid="uid://bufmn53teodym" path="res://Game/Scenes/Player/PlayerController.tscn" id="8_7p4i2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_snjux"]
@@ -173,13 +174,15 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1ra3q"]
 size = Vector2(12, 4)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_stats", "_controller")]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eyplj"]
+radius = 8.0
+height = 16.0
+
+[node name="Player" type="CharacterBody2D"]
 motion_mode = 1
 script = ExtResource("1_y0ut5")
-_stats = NodePath("PlayerStats")
-_controller = NodePath("playerController")
 
-[node name="playerAnimation" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_player")]
+[node name="PlayerAnimation" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_player")]
 sprite_frames = SubResource("SpriteFrames_sf6od")
 animation = &"Left"
 script = ExtResource("5_ewc2k")
@@ -197,18 +200,33 @@ drag_vertical_enabled = true
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_1ra3q")
 
-[node name="PlayerStats" parent="." instance=ExtResource("7_nflbj")]
-visible = false
-SprintFactor = 3.0
-Accel = 0.5
-Decel = 0.7
-
-[node name="playerController" parent="." node_paths=PackedStringArray("_player", "_anims", "_marker") instance=ExtResource("8_7p4i2")]
+[node name="PlayerController" parent="." node_paths=PackedStringArray("_player", "_anims", "_marker") instance=ExtResource("8_7p4i2")]
 visible = false
 _player = NodePath("..")
-_anims = NodePath("../playerAnimation")
+_anims = NodePath("../PlayerAnimation")
 _marker = NodePath("../Marker2D")
 
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, 4)
+[node name="Marker2D" type="Marker2D" parent="." node_paths=PackedStringArray("_player")]
 script = ExtResource("6_a362q")
+_player = NodePath("..")
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="HitBoxShape" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, 2.77)
+scale = Vector2(0.9, 0.7)
+shape = SubResource("CapsuleShape2D_eyplj")
+disabled = true
+one_way_collision_margin = 0.0
+debug_color = Color(0.750328, 0.321947, 0.825384, 0.42)
+
+[node name="OrbitMarker" type="Marker2D" parent="." node_paths=PackedStringArray("_player")]
+script = ExtResource("7_16qop")
+_player = NodePath("..")
+
+[node name="DebugNode" type="Node2D" parent="." node_paths=PackedStringArray("_marker", "_orbit")]
+script = ExtResource("6_8osf6")
+_marker = NodePath("../Marker2D")
+_orbit = NodePath("../OrbitMarker")
+
+[connection signal="draw" from="DebugNode" to="DebugNode" method="draw"]

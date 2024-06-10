@@ -32,8 +32,6 @@ public partial class UnarmedWarrior : CharacterBody2D
 		_controller.SetHealth( _controller.GetHealth() - _controller.GetDamage());
 
 		_controller.SetHealth(_controller.GetHealth() - PlayerStats.BulletDamage);
-		GD.Print("Target Health: " + _controller.GetHealth());
-		GD.Print("Player Damage: " + PlayerStats.BulletDamage);
 
 		if (_controller.GetHealth() < 1)
 			QueueFree();
