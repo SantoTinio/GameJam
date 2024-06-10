@@ -8,7 +8,7 @@ public partial class DebugNode : Node2D
 	public override void _Draw()
 	{
 		DrawCircle(_marker.Position, 1,Colors.Crimson);
-		DrawCircle(_orbit.Position, 1, Colors.Coral);
+		DrawCircle(_orbit.Position, 4, Colors.Black);
 	}
 	public override void _Process(double delta)
 	{

@@ -9,7 +9,7 @@ public partial class OrbitMarker : Marker2D
 
 	public override void _Process(double delta)
 	{
-		//Angles in Radiance
+		//Angles in Radians
 		if (_motion > 360) _motion = 0;
 		
 		_motion += (float)delta * PlayerStats.OrbitSpeed;
